@@ -12,7 +12,7 @@ var (
 )
 
 func init() {
-	file := "bilibili.log"
+	file := "extract.log"
 	logf, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		log.Println("打开日志文件错误")
