@@ -15,11 +15,11 @@ type File struct {
 
 func Mp4(dir string) {
 	//var files []File
-	oldFiles:=getFiles(dir, "mp4")
+	oldFiles := getFiles(dir, "mp4")
 	for _, Name := range oldFiles {
-		oldName:=strings.Join([]string{dir,Name},"/")
+		oldName := strings.Join([]string{dir, Name}, "/")
 		newName := strings.Replace(oldName, ".mp4", ".m4a", -1)
-		command(oldName,newName)
+		command(oldName, newName)
 
 	}
 }
@@ -64,7 +64,7 @@ func command(src, dst string) {
 		tmp := make([]byte, 1024)
 		_, err := stdout.Read(tmp)
 		//写成输出日志
-		t:=replace.Replace(string(tmp))
+		t := replace.Replace(string(tmp))
 		log.Info.Println(t)
 		if err != nil {
 			break

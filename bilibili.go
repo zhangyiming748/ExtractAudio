@@ -64,10 +64,7 @@ type entry struct {
 	} `json:"page_data"`
 }
 
-func Extrace(src, dst string) {
-
-	//src = strings.Join([]string{src, getDir(src)[0]}, "/")
-
+func Extrace(src string) {
 	var infos []Info
 	head := getDir(src)
 	log.Info.Printf("给定的目标文件下全部文件夹:%s\n", head)
@@ -96,17 +93,18 @@ func Extrace(src, dst string) {
 	for _, value := range infos {
 		log.Info.Printf("%+v\n", value)
 	}
-	extrace_help(infos, dst)
+	extrace_help(infos)
 }
 
-func extrace_help(infos []Info, dst string) {
-	for _,info:=range infos{
-		oldName:=info.audio
-		newName:=strings.Join([]string{info.title,"mp3"},".")
-		log.Debug.Printf("文件:%v重命名为:%v\n",oldName,newName)
-		os.Rename(oldName,newName)
+func extrace_help(infos []Info) {
+	for _, info := range infos {
+		oldName := info.audio
+		newName := strings.Join([]string{info.title, "mp3"}, ".")
+		log.Debug.Printf("文件:%v重命名为:%v\n", oldName, newName)
+		os.Rename(oldName, newName)
 	}
 }
+
 func getDir(pwd string) (partname []string) {
 	//获取文件或目录相关信息
 	fileInfoList, err := os.ReadDir(pwd)
@@ -118,6 +116,7 @@ func getDir(pwd string) (partname []string) {
 	}
 	return partname
 }
+
 func readEntry(dir string) (e entry) {
 	bytes, err := os.ReadFile(dir)
 	if err != nil {
